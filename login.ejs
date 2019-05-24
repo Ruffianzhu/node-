@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			table {
+				width: 482px;
+				height: 335px;
+				border-radius: 20px;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+				position: absolute;
+				border: 1px darkcyan solid;
+				border-radius: 20px;
+			}
+		</style>
+		<script src="jquery-3.3.1.min.js"></script>
+	</head>
+
+	<body>
+		<form action="/du" method="post" onsubmit="return yan()">
+			<table border="0" bordercolor="darkcyan" cellspacing="0" cellpadding="0">
+				<tr height="157px" bgcolor="darkcyan">
+					<td colspan="2" style="border-radius: 20px 20px 0 0;"></td>
+				</tr>
+				<tr style="height: 50px;">
+					<td width="150px" align="right" ; style="font-size: 20px;">用&nbsp;&nbsp;户&nbsp;&nbsp;名·:</td>
+					<td style="padding-left: 40px;"><input type="text" id="name" name="name" style="width: 150px;height: 25px;" required="" /></td>
+				</tr>
+				<tr style="height: 50px;">
+					<td align="right" ; style="font-size: 20px;">密&nbsp;&nbsp;&nbsp;&nbsp;码:</td>
+					<td style="padding-left: 40px;"><input type="password" id="mima" name="mima" style="width: 150px;height: 25px;" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center;border-radius: 0 0 20px 20px;"><input id="aaa" value="登录" type="submit" style="width: 130px;height: 40px;background: darkcyan;color: ghostwhite;" />
+						<a style="position: absolute;margin-left: 100px;margin-top: 10px;" href="zhuce">注册</a>
+					</td>
+				</tr>
+				<tr height="20px" align="center">
+					<td colspan="2" id="err"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+	<script type="text/javascript">
+		var ismo = false;
+		function yan() {
+			$.post("/checklogin", {
+				"name": $("#name").val(),
+				"password": $("#mima").val()
+			}, function(result) {
+				if(result == 1) {
+					ismo=true;
+				} else {
+					$("#err").text(result);
+				}
+			})
+			return ismo;
+		}
+	</script>
+
+</html>
