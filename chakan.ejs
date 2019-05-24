@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			#top{
+				width: 100%;
+				height: 50px;
+				background: gainsboro;
+			}
+			#top a{
+				text-decoration: none;
+				color: dimgray;
+				display: block;
+				line-height: 50px;
+				height: 50px;
+				width: 150px;
+				text-align: center;
+				font-size: 15px;
+			}
+			#top a:hover{
+				background: gray;
+				color: white;
+			}
+			h2{
+				background: darkgray;
+				width: 100px;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				border: 1px solid black;
+				border-bottom: none;
+			}
+			p{
+				display: block;
+				padding: 10px;
+				border: 1px solid black;
+				height: 100px;
+			}
+			.box{
+				width: 1000px;
+				margin-left: 20px;
+				margin-bottom: 40px;
+				height: 143px;
+			}
+			.center{
+				width: 1200px;
+				height: 550px;
+				padding: 10px;
+				border:1px solid black;
+				margin-left: 20px;
+			    background: rgb(240,240,240);
+			    float: left;
+			    margin-top: 10px;
+			}
+			.center a{
+				text-decoration: none;
+				display: block;
+				float: left;
+				color: gray;
+				position: absolute;
+				height: 30px;
+				margin-top: -60px;
+				margin-left: 1100px;
+			}
+			.he{
+				margin-left: 20px;
+			}
+			.he a{
+				display: block;
+				text-decoration: none;
+				border: 1px solid gray;
+				border-right: none;
+				width: 50px;
+				height: 50px;
+				float: left;
+				line-height: 50px;
+				text-align: center;
+				color: gray;
+				font-size: 20px;
+			}
+			.he a:last-child{border-right: 1px solid gray;}
+			#zhu{
+				position: absolute;
+				margin-left: 1200px;
+				margin-top: -50px;
+			}
+			#top img{
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				position: absolute;
+				border: 1px solid gray;
+				margin-left: 1200px;
+				margin-top: -50px;
+			}
+		</style>
+		<script src="jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+		<div id="top">
+			<a href="/liuyan">给他留言</a>
+			<a id="zhu" href="/">注销</a>
+			<img src="images/<%= username %>.jpg" alt=""/>
+		</div><br />
+		<h1>我的留言本</h1><br />
+		<div class="he">
+			<a class="dian" style="background: blue;color: white;" href="#">1</a>
+			<% for(var i=0;i<num-1;i++){ %>
+				<a class="dian" href="#"><%= i+2 %></a>
+			<% } %>
+		</div> 
+		<div class="center">
+		<% for(var i=0;i<result.length;i++){ %>
+		<div class="box">
+			<h2><%= result[i].username %></h2>
+			<p><%= result[i].text %></p>
+		</div>
+		<a href="/shan?id=<%= result[i]._id %>" class="shan">删除</a>
+		<% } %>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(".dian").mouseover(function(){
+			if($(this).css("background")!="rgb(0, 0, 255) none repeat scroll 0% 0% / auto padding-box border-box"){
+				$(this).css("background","darkgray").css("color","black");
+			}
+		})
+		$(".dian").mouseout(function(){
+			if($(this).css("background")!="rgb(0, 0, 255) none repeat scroll 0% 0% / auto padding-box border-box"){
+				$(this).css("background","white").css("color","gray");
+			}
+		})
+		$(".dian").click(function(){
+			$(".dian").css("background","white").css("color","gray");
+			$(this).css("background","blue").css("color","white");
+			var page=parseInt($(this).text());
+			$.post("./judu",{
+				"page":page
+			},function(result){
+				console.log(result);
+				$(".center").text("");
+               for(var i=0;i<result.length;i++){
+               	var div=document.createElement("div");
+               	var h2=document.createElement("h2");
+               	var p=document.createElement("p");
+               	var a=document.createElement("a");
+               	a.className="shan";
+               	a.innerHTML="删除";
+               	a.href="/shan?id="+result[i]._id;
+               	div.className="box";
+               	h2.innerHTML=result[i].username;
+               	p.innerHTML=result[i].text;
+               	div.appendChild(h2);
+               	div.appendChild(p);
+               	$(".center").append(div);
+               	$(".center").append(a);
+               }
+			})
+		});
+	</script>
+</html>
+
