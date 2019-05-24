@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			tr td:nth-child(1){
+				text-align: right;
+				background: gainsboro;
+			}
+		</style>
+		<script src="jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+		<form action="/zhuce" method="post" enctype="multipart/form-data" onsubmit="return yan()">
+		<table border="1" width="300px" height="300px" cellpadding="10px" cellspacing="0">
+			<tr height="40px">
+				<td width="150px">用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:&nbsp;&nbsp;&nbsp;</td>
+				<td><input required="" placeholder="请输入账号"name="name" type="text" value="" style="width: 200px;height: 30px;"/></td>
+			</tr>
+			<tr height="40px">
+				<td>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;&nbsp;&nbsp;</td>
+				<td><input required="" placeholder="请输入密码" id="mima" name="mima" type="password" value="" style="width: 200px;height: 30px;"/></td>
+			</tr>
+			<tr height="40px">
+				<td>确&nbsp;认&nbsp;密&nbsp;码:&nbsp;&nbsp;&nbsp;</td>
+				<td>
+					<input required="" placeholder="请确认密码" name="mima2" id="mima2" type="password" style="width: 200px;height: 30px;"/>
+				</td>
+			</tr>
+			<tr height="40px">
+				<td>选&nbsp;&nbsp;择&nbsp;&nbsp;头&nbsp;&nbsp;像</td>
+				<td>
+					<input type="file" name="tupian" value="" style="width: 200px;height: 30px;"/>
+				</td>
+			</tr>
+			<tr height="50px">
+				<td colspan="2" style="background: seashell;text-align: center;">
+					<input type="submit" name="zhuce" id="zhece" value="注册" style="width: 100px;height: 30px;background:gainsboro" />
+					<input type="reset" name="next" id="" value="重写" style="width: 60px;height: 30px;background:gainsboro;"/>
+				</td>
+			</tr>
+		</table>
+		</form>
+	</body>
+	<script type="text/javascript">
+		function yan(){
+			if($("#mima").val()==$("#mima2").val()){
+				return true;
+			}else{
+				alert("两次输入密码不一致");;
+				return false;
+			}
+		}
+	</script>
+</html>
+
