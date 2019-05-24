@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 300px;
+				height: 400px;
+				margin-left: 50px;
+				font-size: 20px;
+			}
+			#tijiao{
+				background: green;
+				width: 100px;
+				height: 30px;
+				color: white;
+				font-size: 20px;
+				line-height: 30px;
+				text-align: center;
+				border: none;
+				border-radius:5px;
+			}
+			#top{
+				width: 100%;
+				height: 50px;
+				background: gainsboro;
+			}
+			#top a{
+				text-decoration: none;
+				color: dimgray;
+				display: block;
+				line-height: 50px;
+				height: 50px;
+				width: 150px;
+				text-align: center;
+				font-size: 15px;
+			}
+			#top a:hover{
+				background: gray;
+				color: white;
+			}
+			#zhu{
+				position: absolute;
+				margin-left: 1200px;
+				margin-top: -50px;
+			}
+		</style>
+		<script src="jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+		<div id="top">
+			<a href="/du">查看我的留言</a>
+			<a id="zhu" href="/">注销</a>
+		</div>
+		<h1>我的留言本</h1>
+		<div id="box">
+			姓名：<input type="text" id="name" name="name" placeholder="请输入姓名"/><br /><br />
+			留言：<textarea name="text" id="text" cols="30" rows="5"></textarea><br /><br />
+			<button id="tijiao">提交</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$("#tijiao").click(function(){
+			$.post("/tijiao",{
+				"name":$("#name").val(),
+				"text":$("#text").val()
+			},function(result){
+				if(result==1){
+					alert("留言成功");
+				}else{
+					alert("留言失败");
+				}
+			})
+			$("#name").val("");
+			$("#text").val("");
+		})
+	</script>
+</html>
+
